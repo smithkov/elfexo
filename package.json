@@ -1,9 +1,6 @@
 {
   "name": "nodeauthentication",
   "version": "1.0.0",
-  "engines": {
-    "node": "6.11.1"
-  },
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -32,5 +29,8 @@
     "passport-http": "*",
     "passport-local": "*",
     "request": "^2.88.0"
-  }
+  ,
+  "engine":{
+    "node":"0.12.7"
+  },
 }
