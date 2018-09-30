@@ -120,9 +120,17 @@ passport.deserializeUser(function (id, done) {
 	});
 });
 
-router.post('/login',passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
+router.post('/login',function (req, res, next) {
 
-	res.redirect('/');
+	if(!req.recaptcha.error){
+		debugger;
+		passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true });
+			res.redirect('/dashboard');
+	}else{
+		debugger;
+		res.redirect('/login');
+
+	}
 
 });
 
