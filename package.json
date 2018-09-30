@@ -28,9 +28,9 @@
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
-    "request": "^2.88.0"
-  ,
+    "request": "^2.88.0",
   "engine":{
     "node":"0.12.7"
-  },
+  }
+}
 }
