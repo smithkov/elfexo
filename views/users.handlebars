@@ -1,0 +1,43 @@
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <a href="/coinAdd" class="btn btn-primary">Add Crypto</a><hr>
+  {{#if success_msg}}
+  <hr>
+    <div class="alert alert-success">{{success_msg}}</div>
+  {{/if}}
+  <table id="example" class="display" style="width:100%">
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                  <th>DOR</th>
+                  <th>Role</th>
+              </tr>
+          </thead>
+          <tbody>
+            {{#each users}}
+              <tr>
+                  <td>{{this.name}}</td>
+                  <td>{{this.username}} USD</td>
+                  <td>{{this.email}} USD</td>
+                  {{#if this.status}}
+                     <td>Active</td>
+                  {{else}}
+                    <td>Inactive</td>
+                  {{/if}}
+                  <td>{{this.dor}}</td>
+                  {{#if this.roleId}}
+                     <td>Admin</td>
+                  {{else}}
+                    <td>User</td>
+                  {{/if}}
+              </tr>
+              {{/each}}
+          </tbody>
+      </table>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>

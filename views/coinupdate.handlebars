@@ -1,0 +1,20 @@
+<form action="/updateCoinPost" method="POST" enctype="multipart/form-data">
+  <div class="col-lg-8">
+    <a href="/coinListing" class="btn btn-primary">List Crypto</a><hr>
+    {{#if success_msg}}
+    <hr>
+      <div class="alert alert-success">{{success_msg}}</div>
+    {{/if}}
+    <input type="hidden" name ="id" value="{{crypto.id}}"></input>
+      <input type="hidden" name ="path" value="{{crypto.path}}"></input>
+    <input class="form-control" value ="{{crypto.coinName}}" placeholder="Coin name" type="text" name="coinName" ></input>
+    <input class="form-control" value ="{{crypto.sellPrice}}" placeholder="Selling price" type="text" name="sellPrice" ></input>
+    <input class="form-control" value ="{{crypto.buyPrice}}" placeholder="Buy price" type="text" name="buyPrice" ></input>
+    <input class="form-control" value ="{{crypto.initial}}" placeholder="Initial name" type="text" name="initial" ></input><br/>
+    <input class="form-control"  type="file" name="myimage" ></input><br/>
+    <input class="btn btn-primary" type="submit" name="submit" value="submit"></input>
+</div>
+</form>
+<div style="margin-top:70px" class="col-lg-4">
+  <img src="/uploads/{{crypto.path}}" />
+</div>

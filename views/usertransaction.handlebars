@@ -1,0 +1,39 @@
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+  {{#if success_msg}}
+  <hr>
+    <div class="alert alert-success">{{success_msg}}</div>
+  {{/if}}
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+    <div class="alert bg-info"> Transaction history <a href="#" class="pull-right"></a></div>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Coin</th>
+                <th>Buy Price</th>
+                <th>Amount</th>
+                <th>Total</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#each transactions}}
+            <tr>
+                <td>{{this.coinId.coinName}}</td>
+                <td>{{this.buyPrice}}</td>
+                <td>{{this.amount}}</td>
+                <td>{{this.total}} USD</td>
+                <td>{{this.txStatus}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+  </div>
+  <div class="col-lg-2"></div>
+
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>

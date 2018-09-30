@@ -1,0 +1,33 @@
+{
+  "name": "nodeauthentication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
+    "express": "*",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-recaptcha": "^4.0.3",
+    "express-session": "*",
+    "express-validator": "*",
+    "handlebars-dateformat": "^1.1.1",
+    "hbs": "^4.0.1",
+    "mongodb": "*",
+    "mongoose": "*",
+    "multer": "*",
+    "nodemon": "^1.18.4",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+    "request": "^2.88.0"
+  }
+}

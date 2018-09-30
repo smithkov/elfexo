@@ -1,0 +1,168 @@
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<style>
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+.col{
+  color:#20233B;
+  font-weight: bold;
+}
+</style>
+{{#if user.roleId}}
+      <div class="panel panel-container">
+        <div class="row">
+          <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+            <div class="panel panel-teal panel-widget border-right">
+              <div class="row no-padding"><em class="fa fa-xl fa-users color-blue"></em>
+                <div class="large">{{users}}</div>
+                <div class="text-muted">Total Users</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+            <div class="panel panel-blue panel-widget border-right">
+              <div class="row no-padding"><em class="fa fa-xl fa-money color-orange"></em>
+                <div class="large">{{transaction}}</div>
+                <div class="text-muted">Total Transact</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+            <div class="panel panel-orange panel-widget border-right">
+              <div class="row no-padding"><em class="fa fa-xl fa-thumbs-up color-teal"></em>
+                <div class="large">{{approved}}</div>
+                <div class="text-muted">Confirmed Transact</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+            <div class="panel panel-red panel-widget ">
+              <div class="row no-padding"><em class="fa fa-xl fa-thumbs-down color-red"></em>
+                <div class="large">{{transacByStatus}}</div>
+                <div class="text-muted">Unconfirmed Transact</div>
+              </div>
+            </div>
+          </div>
+        </div><!--/.row-->
+      </div>
+{{else}}
+    <div class="panel panel-container">
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-6">
+          <table id="coinList" class="display" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>Coin Name</th>
+                      <th>Price</th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                {{#each cryptos}}
+                    <tr class="item" id="{{this.id}}" data-name ="{{this.coinName}}" data-price ="{{this.buyPrice}}">
+                      <a href="#" >
+                        <td><a href="#">{{this.coinName}}</a></td>
+                        <td>{{this.buyPrice}} USD</td>
+                        <td><a href="/buyCoin/{{this.id}}">Buy</a></td>
+                        <td><a href="#">Sell</a></td>
+                      </a>
+                   </tr>
+
+                  {{/each}}
+              </tbody>
+          </table>
+        </div>
+
+        <div class="col-lg-4">
+          <p class="alert bg-info">Transaction Panel</p>
+          {{#if error_msg}}
+          <hr>
+            <div class="alert alert-danger">{{error_msg}}</div>
+          {{/if}}
+          <form method="post" action="/transaction/dashboardPost">
+          <table cellpadding="30">
+            <tr><td class="col">Coin Name:</td><td><input id="name" style="width:100%" name="name" type="text"  readonly></input></td></tr>
+            <tr><td class="col">Price:</td><td><input  id="price" style="width:100%" name="price" type="text"  readonly></input></td></tr>
+            <tr><td class="col">Amount:</td><td><input class="numericOnly" name="amount" id="amt" style="width:100%" type="text"></input></td></tr>
+            <tr><td class="col">Total: </td><td><input type="number" id="total" name="total"  readonly style="width:100%"></input></td></tr>
+            <input name="coinId" id="coinId" type="hidden"/>
+            <tr><td></td><td><button id="btn-submit" class="btn btn-primary" type="submit">Buy</button></td></tr>
+          </table>
+        </form>
+
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+    </div>
+{{/if}}
+
+
+	<!-- <div class="row">
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>New Orders</h4>
+						<div class="easypiechart" id="easypiechart-blue" data-percent="92" ><span class="percent">92%</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Comments</h4>
+						<div class="easypiechart" id="easypiechart-orange" data-percent="65" ><span class="percent">65%</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>New Users</h4>
+						<div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Visitors</h4>
+						<div class="easypiechart" id="easypiechart-red" data-percent="27" ><span class="percent">27%</span></div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row--> 
+    <script>
+    $(document).ready(function() {
+      $(".numericOnly").keypress(function (e) {
+         if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+      });
+      var price = $("#price");
+      var total = $("#total");
+      var amt = $("#amt");
+      var btnSubmit =  $("#btn-submit");
+      btnSubmit.prop('disabled', true);
+
+      amt.keyup(function(){
+
+          if($(this).val() === "")
+            btnSubmit.prop('disabled', true);
+          else
+            btnSubmit.prop('disabled', false);
+      });
+
+        $(".item").click(function(){
+           $("#name").val($(this).attr("data-name"));
+          price.val($(this).attr("data-price"));
+          $("#coinId").val($(this).attr("id"));
+          total.empty();
+
+           amt.keyup(function(){
+            total.empty().val(parseFloat(amt.val()) * parseFloat(price.val()));
+           })
+        })
+        $('#coinList').DataTable();
+    } );
+    </script>
