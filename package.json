@@ -2,13 +2,8 @@
   "name": "nodeauthentication",
   "version": "1.0.0",
   "engines": {
-    "node": "0.12.7"
+    "node": "6.11.1"
   },
-  "keywords":[
-    "node",
-    "heroku",
-    "express"
-  ],
   "description": "",
   "main": "index.js",
   "scripts": {
