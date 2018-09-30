@@ -120,14 +120,14 @@ passport.deserializeUser(function (id, done) {
 	});
 });
 
-router.post('/login',function (req, res, next) {
+router.post('/login',recaptcha.middleware.verify,function (req, res, next) {
 
 	if(!req.recaptcha.error){
-		debugger;
-		passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true });
+		//debugger;
+		passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/user/login', failureFlash: true });
 			res.redirect('/dashboard');
 	}else{
-		debugger;
+		//debugger;
 		res.redirect('/login');
 
 	}
