@@ -2,12 +2,17 @@
   "name": "nodeauthentication",
   "version": "1.0.0",
   "engines": {
-    "node": "6.11.1"
+    "node": "0.12.7"
   },
+  "keywords":[
+    "node",
+    "heroku",
+    "express"
+  ],
   "description": "",
-  "main": "node index.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
