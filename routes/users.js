@@ -120,19 +120,22 @@ passport.deserializeUser(function (id, done) {
 	});
 });
 
-router.post('/login',recaptcha.middleware.verify,function (req, res, next) {
+router.post('/login',recaptcha.middleware.verify,captchaVerification,passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
 
-	if(!req.recaptcha.error){
-		//debugger;
-		passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/user/login', failureFlash: true });
-			res.redirect('/dashboard');
-	}else{
-		//debugger;
-		res.redirect('/login');
+res.redirect('/dashboard');
 
-	}
 
 });
+
+function captchaVerification(req, res, next) {
+	if (req.recaptcha.error) {
+			req.flash('error_msg','Captcha not correct');
+			res.redirect('/login');
+	} else {
+			return next();
+	}
+
+};
 
 router.get('/logout', function (req, res) {
 	req.logout();
