@@ -11,7 +11,7 @@ var User = require('../models/user');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 // Register
-router.get('/register', function (req, res) {
+router.get('/register',recaptcha.middleware.render,function (req, res) {
 	res.render('register');
 });
 
@@ -34,7 +34,7 @@ router.get('/users',ensureAuthenticated, function(req, res, next) {
   }
 });
 // Register User
-router.post('/register', function (req, res) {
+router.post('/register',recaptcha.middleware.verify,captchaVerification, function (req, res) {
 	var name = req.body.name;
 	var email = req.body.email;
 	var username = req.body.username;
