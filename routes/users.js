@@ -12,7 +12,8 @@ var TokenEmail = require('../models/tokenEmail');
 var User = require('../models/user');
 var Mailer = require('../my_modules/mailer');
 var ObjectID = require('mongodb').ObjectID;
-const url = "http://localhost:3000";
+const url ="https://namdex.herokuapp.com";
+//const url = "http://localhost:3000";
 const verifyPath = "/verifyAccount/";
 const verifyUrl = url+verifyPath;
 const forgotPasswordUrl = url +"/resetPassword/";
@@ -59,8 +60,8 @@ router.get('/resendVerification',ensureAuthenticated,function (req, res) {
 	res.redirect('/dashboard');
 });
 
-//router.post('/login',recaptcha.middleware.verify,captchaVerificationLogin,passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
-router.post('/login',passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
+router.post('/login',recaptcha.middleware.verify,captchaVerificationLogin,passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
+//router.post('/login',passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
 
    res.redirect('/dashboard');
 });
@@ -187,9 +188,9 @@ router.post('/resetPassword',function (req, res, next) {
 	}
 
 });
-//router.post('/register',recaptcha.middleware.verify,captchaVerificationRegister, function (req, res) {
+router.post('/register',recaptcha.middleware.verify,captchaVerificationRegister, function (req, res) {
 // Register User
-router.post('/register', function (req, res) {
+//router.post('/register', function (req, res) {
 	var name = req.body.name;
 	var email = req.body.email;
 	var username = req.body.username;
