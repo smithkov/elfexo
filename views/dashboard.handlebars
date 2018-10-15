@@ -9,6 +9,10 @@ th, td {
   font-weight: bold;
 }
 </style>
+{{#if success_msg}}
+<hr>
+  <div class="alert alert-success">{{success_msg}}</div>
+{{/if}}
 {{#if user.roleId}}
       <div class="panel panel-container">
         <div class="row">
@@ -47,56 +51,67 @@ th, td {
         </div><!--/.row-->
       </div>
 {{else}}
-    <div class="panel panel-container">
-      <div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-6">
-          <table id="coinList" class="display" style="width:100%">
-              <thead>
-                  <tr>
-                      <th>Coin Name</th>
-                      <th>Price</th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-              </thead>
-              <tbody>
-                {{#each cryptos}}
-                    <tr class="item" id="{{this.id}}" data-name ="{{this.coinName}}" data-price ="{{this.buyPrice}}">
-                      <a href="#" >
-                        <td><a href="#">{{this.coinName}}</a></td>
-                        <td>{{this.buyPrice}} USD</td>
-                        <td><a href="/buyCoin/{{this.id}}">Buy</a></td>
-                        <td><a href="#">Sell</a></td>
-                      </a>
-                   </tr>
+{{#if user.status}}
+  <div class="panel panel-container">
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-6">
+      <table id="coinList" class="display" style="width:100%">
+          <thead>
+              <tr>
+                  <th>Coin Name</th>
+                  <th>Price</th>
+                  <th></th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+            {{#each cryptos}}
+                <tr class="item" id="{{this.id}}" data-name ="{{this.coinName}}" data-price ="{{this.buyPrice}}">
+                  <a href="#" >
+                    <td><a href="#">{{this.coinName}}</a></td>
+                    <td>{{this.buyPrice}} USD</td>
+                    <td><a href="/buyCoin/{{this.id}}">Buy</a></td>
+                    <td><a href="#">Sell</a></td>
+                  </a>
+               </tr>
 
-                  {{/each}}
-              </tbody>
-          </table>
-        </div>
-
-        <div class="col-lg-4">
-          <p class="alert bg-info">Transaction Panel</p>
-          {{#if error_msg}}
-          <hr>
-            <div class="alert alert-danger">{{error_msg}}</div>
-          {{/if}}
-          <form method="post" action="/transaction/dashboardPost">
-          <table cellpadding="30">
-            <tr><td class="col">Coin Name:</td><td><input id="name" style="width:100%" name="name" type="text"  readonly></input></td></tr>
-            <tr><td class="col">Price:</td><td><input  id="price" style="width:100%" name="price" type="text"  readonly></input></td></tr>
-            <tr><td class="col">Amount:</td><td><input class="numericOnly" name="amount" id="amt" style="width:100%" type="text"></input></td></tr>
-            <tr><td class="col">Total: </td><td><input type="number" id="total" name="total"  readonly style="width:100%"></input></td></tr>
-            <input name="coinId" id="coinId" type="hidden"/>
-            <tr><td></td><td><button id="btn-submit" class="btn btn-primary" type="submit">Buy</button></td></tr>
-          </table>
-        </form>
-
-        </div>
-        <div class="col-lg-1"></div>
-      </div>
+              {{/each}}
+          </tbody>
+      </table>
     </div>
+
+    <div class="col-lg-4">
+      <p class="alert bg-info">Transaction Panel</p>
+      {{#if error_msg}}
+      <hr>
+        <div class="alert alert-danger">{{error_msg}}</div>
+      {{/if}}
+      <form method="post" action="/transaction/dashboardPost">
+      <table cellpadding="30">
+        <tr><td class="col">Coin Name:</td><td><input id="name" style="width:100%" name="name" type="text"  readonly></input></td></tr>
+        <tr><td class="col">Price:</td><td><input  id="price" style="width:100%" name="price" type="text"  readonly></input></td></tr>
+        <tr><td class="col">Amount:</td><td><input class="numericOnly" name="amount" id="amt" style="width:100%" type="text"></input></td></tr>
+        <tr><td class="col">Total: </td><td><input type="number" id="total" name="total"  readonly style="width:100%"></input></td></tr>
+        <input name="coinId" id="coinId" type="hidden"/>
+        <tr><td></td><td><button id="btn-submit" class="btn btn-primary" type="submit">Buy</button></td></tr>
+      </table>
+    </form>
+
+    </div>
+    <div class="col-lg-1"></div>
+  </div>
+</div>
+{{else}}
+  <div class="panel panel-danger">
+    <div class="panel-heading">Verification Needed</div>
+    <div class="panel-body">
+      <p><h4>Please activate your account <a href="/resendVerification">Resend activation link </a></h4></p>
+    </div>
+  </div>
+{{/if}}
+
+
 {{/if}}
 
 
@@ -133,7 +148,7 @@ th, td {
 					</div>
 				</div>
 			</div>
-		</div><!--/.row--> 
+		</div><!--/.row-->
     <script>
     $(document).ready(function() {
       $(".numericOnly").keypress(function (e) {

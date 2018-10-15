@@ -39,8 +39,25 @@ module.exports.createUser = function(newUser, callback){
 	});
 }
 
+module.exports.resetUserPassword= function(id,user,options, callback){
+	bcrypt.genSalt(10, function(err, salt) {
+
+	    bcrypt.hash(user.password, salt, function(err, hash) {
+          user.password = hash;
+					var query = {_id:id};
+
+					 console.log(user.password)
+					User.findByIdAndUpdate(query,{password:user.password}, options,callback);
+	    });
+	});
+}
 module.exports.getUserByUsername = function(username, callback){
 	var query = {username: username};
+	User.findOne(query, callback);
+}
+
+module.exports.getUserByEmail = function(email, callback){
+	var query = {email: email};
 	User.findOne(query, callback);
 }
 

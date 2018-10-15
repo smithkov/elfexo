@@ -1,0 +1,27 @@
+
+<div class="panel panel-container">
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      {{#if errorMsg}}
+      <hr>
+
+        <div class="panel panel-danger">
+         <div class="panel-heading">Oops! Verification error</div>
+         <div class="panel-body">
+           <p>{{message}}</p>
+         </div>
+       </div>
+        {{else}}
+          <div class="panel panel-success">
+  					<div class="panel-heading">Verification okay</div>
+  					<div class="panel-body">
+  						<p>{{message}}<a href="/login"> Login to Elfexo</a></p>
+  					</div>
+  				</div>
+      {{/if}}
+    </div>
+
+    <div class="col-lg-3"></div>
+  </div>
+</div>

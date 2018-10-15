@@ -12,8 +12,13 @@ router.getCryptos = function(callback, limit) {
  Crypto.find(callback).limit(limit);
 }
 router.get('/', function(req, res){
-	res.render('index');
-});
+  router.getCryptos(function(err,cryptos){
+      if(err){
+        throw err;
+      }
+  	   res.render('index',{cryptos:cryptos});
+      });
+  });
 
 router.get('/dashboard',ensureAuthenticated, function(req, res){
 

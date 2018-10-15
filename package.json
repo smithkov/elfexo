@@ -10,9 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "*",
+    "bluebird": "^3.5.2",
     "body-parser": "*",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
+    "email-templates": "^2.7.1",
     "express": "*",
     "express-handlebars": "*",
     "express-messages": "*",
@@ -24,11 +26,10 @@
     "mongodb": "*",
     "mongoose": "*",
     "multer": "*",
-    "nodemon": "^1.18.4",
+    "nodemailer": "^4.6.8",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*",
-    "request": "^2.88.0",
+    "passport-local": "*"
   "engine":{
     "node":"0.12.7"
   }
