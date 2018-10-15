@@ -29,7 +29,7 @@
     "nodemailer": "^4.6.8",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*"
+    "passport-local": "*",
   "engine":{
     "node":"0.12.7"
   }
