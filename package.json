@@ -1,34 +1,37 @@
 {
-    "name": "nodeauthentication",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "bcryptjs": "*",
-        "bluebird": "^3.5.2",
-        "body-parser": "*",
-        "connect-flash": "*",
-        "cookie-parser": "^1.4.1",
-        "email-templates": "^2.7.1",
-        "express": "*",
-        "express-handlebars": "*",
-        "express-messages": "*",
-        "express-recaptcha": "^4.0.3",
-        "express-session": "*",
-        "express-validator": "*",
-        "handlebars-dateformat": "^1.1.1",
-        "hbs": "^4.0.1",
-        "mongodb": "*",
-        "mongoose": "*",
-        "multer": "*",
-        "nodemailer": "^4.6.8",
-        "passport": "*",
-        "passport-http": "*",
-        "passport-local": "*"
-    }
+  "name": "nodeauthentication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "*",
+    "bluebird": "^3.5.2",
+    "body-parser": "*",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
+    "email-templates": "^2.7.1",
+    "express": "*",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-recaptcha": "^4.0.3",
+    "express-session": "*",
+    "express-validator": "*",
+    "handlebars-dateformat": "^1.1.1",
+    "hbs": "^4.0.1",
+    "mongodb": "*",
+    "mongoose": "*",
+    "multer": "*",
+    "nodemailer": "^4.6.8",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+  "engine":{
+    "node":"0.12.7"
+  }
+}
 }
