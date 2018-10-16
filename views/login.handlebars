@@ -1,33 +1,26 @@
+<div class="container">
+<div class="col-lg-3"></div>
+<div class="col-lg-6">
 
-<link rel="stylesheet" href="/css/login.css">
-
-
-        <div class="wrapper fadeInDown">
-          <div id="formContent">
-            <div class="fadeIn first">
-            
-              <h1>Elfexo</h1>
-            </div>
-
-            <!-- Login Form -->
-              <form method="post" action="/login">
-              <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
-              <input type="password" id="login" class="fadeIn third" name="password" placeholder="password">
-
-              <input type="submit" class="fadeIn fourth" value="Login">
-              <div class="fadeIn third">
-                  <div  style="width:40%" class="g-recaptcha" data-sitekey="6Lc-zXIUAAAAACe_rS1Q8DP7BNbly8LolGJGxcb3"></div>
-              </div>
-
-              <div style="text-align:center">Don't have an account? Register <a href="/register">here</a>.</div>
-              <div style="text-align:center"> <a href="/forgotPassword">Forgot password?</a>.</div>
-            </form>
-
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-              <a class="underlineHover" href="#">Go to the Site</a>
-            </div>
-
+    <div class="address-box boxshadow">
+        <h4>Login</h4>
+      <form method="post">
+          <div class="form-group">
+              <input type="text" name="username" placeholder="Username" class="form-control" required/>
           </div>
-        </div>
-    </form>
+          <div class="form-group">
+              <input type="password" name="password" placeholder="Password" class="form-control" required/>
+          </div>
+          <button type="submit" class="cryptod-button-warning">Login</button><hr/>
+          <div class="form-group">
+              <div class="g-recaptcha" data-sitekey="6Lc-zXIUAAAAACe_rS1Q8DP7BNbly8LolGJGxcb3"></div>
+          </div>
+
+          <div style="text-align:center">Don't have an account? Register <a href="/register">here</a>.</div>
+          <div style="text-align:center"> <a href="/forgotPassword">Forgot password?</a>.</div>
+      </form>
+    </div>
+
+</div><!--/.comment-form-->
+<div class="col-lg-3"></div>
+</div>
