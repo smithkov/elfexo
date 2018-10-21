@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "gulp",
+    "heroku-postbuild": "gulp",
     "start": "node app.js"
   },
   "author": "",
