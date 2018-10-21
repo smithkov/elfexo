@@ -60,8 +60,8 @@ router.get('/resendVerification',ensureAuthenticated,function (req, res) {
 	res.redirect('/dashboard');
 });
 
-router.post('/login',recaptcha.middleware.verify,captchaVerificationLogin,passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
-//router.post('/login',passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
+//router.post('/login',recaptcha.middleware.verify,captchaVerificationLogin,passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
+router.post('/login',passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
 //router.post('/login',passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true }),function (req, res, next) {
    res.redirect('/dashboard');
 });
