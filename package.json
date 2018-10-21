@@ -4,7 +4,6 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-  "poststart": "npm prune --production",
     "start": "node app.js"
   },
   "author": "",
