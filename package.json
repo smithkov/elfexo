@@ -15,9 +15,6 @@
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
     "email-templates": "^2.7.1",
-    "engine": {
-      "node": "0.12.7"
-    },
     "express": "*",
     "express-handlebars": "*",
     "express-messages": "*",
@@ -34,5 +31,8 @@
     "passport-http": "*",
     "passport-local": "*",
     "semantic-ui": "^2.4.1"
+  },
+  "engine": {
+      "node": "4.1.1"
   }
 }
