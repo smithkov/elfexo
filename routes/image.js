@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 var Crypto = require('../models/cryptos');
+var CryptoAccount = require('../models/cryptoAccount');
+var AccountTransaction = require('../models/accountTransactions');
 const url = require('url');
 
 router.getImages = function(callback, limit) {
@@ -153,6 +155,75 @@ router.post('/coinAdd', upload.any(),ensureAuthenticated, function(req, res, nex
 
 
 });
+router.get('/openAccount',ensureAuthenticated, function(req, res, next) {
+
+  router.getImages(function(err,cryptos){
+     if(err){
+       throw err;
+     }
+     req.session.allCoins = cryptos;
+     res.render('cryptoaccount',{layout:'layoutDashboard.handlebars',user:req.user,cryptos:cryptos});
+  })
+
+});
+
+router.post('/openAccount',ensureAuthenticated,function(req, res, next) {
+
+var selectedCoin = req.body.crypo;
+
+  var getAllcoins = req.session.allCoins;
+  var selectedCoinArray = [];
+
+  for(var i=0; getAllcoins.length>i; i++ ){
+      for(var j=0; selectedCoin.length>j; j++){
+          if(selectedCoin[j] === getAllcoins[i]._id){
+             selectedCoinArray.push({name:getAllcoins[i].coinName, id:getAllcoins[i]._id,price:5000});
+               continue;
+          }
+      }
+  }
+    req.session.coins = selectedCoinArray;
+    res.redirect("/digitalAccountCreateSave")
+});
+
+router.get('/digitalAccountCreateSave',ensureAuthenticated, function(req, res, next) {
+  var coins = req.session.coins;
+  res.render('accountsave',{layout:'layoutDashboard.handlebars',user:req.user,cryptos:coins,total:coins.length*AccountTransaction.amount});
+});
+
+router.post('/digitalAccountCreateSave', function(req, res, next) {
+
+  var coins = req.session.coins;
+  var a = Math.floor(Math.random() * (1000 - 10000)) + 100000;
+  var b = Math.floor(Math.random() * (1000 - 10000)) + 100000;
+  var accountTransaction = new AccountTransaction({
+    refId:a+""+b,
+    txStatus:false,
+    totalPrice :coins*AccountTransaction.amount,
+    user:req.user.id
+  })
+
+  AccountTransaction.createAccTransaction(accountTransaction,function(err, transaction){
+      if(err){
+        throw err;
+      }
+      for(var i=0; coins.length>i; i++ ){
+        CryptoAccount.createCryptoAcct(new CryptoAccount({coin:coins[i].id, user:req.user.id,transaction:transaction.id}),function(err, acct){
+          if(err){
+            throw err;
+          }
+        })
+      }
+
+  });
+  res.redirect("/cryptoAccountFinal");
+});
+
+router.get('/cryptoAccountFinal', function(req, res, next) {
+  var coins = req.session.coins;
+  res.render('cryptoaccountfinal',{layout:'layoutDashboard.handlebars',user:req.user});
+});
+
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();

@@ -1047,14 +1047,14 @@ input[type="submit"] {
   background: url("../images/banner/footer-banner.png"); }
 
 .footer-area {
-  background: #282828;
+  background: #fff;
   background-size: cover;
-  padding-top: 95px; }
+  padding-top: 2px; }
 
 .footer-content {
   margin-bottom: 30px; }
   .footer-content .text-content p {
-    color: #bababa;
+    color:#000000;
     padding-bottom: 10px;
     padding-right: 10px; }
   .footer-content h4 {

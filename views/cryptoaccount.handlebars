@@ -1,0 +1,55 @@
+
+
+
+<div class="col-lg-12">
+
+  <div style="padding-top:40px; padding-bottom:40px" class="ui last container">
+    <div class="ui three steps">
+      <div class="active step">
+        <div class="content">
+          <div class="title">Selection</div>
+          <div class="description">Select a coin for account creation</div>
+        </div>
+      </div>
+      <div class="disabled step">
+        <div class="content">
+          <div class="title">Confirmation</div>
+          <div class="description">Confirn transaction before proceeding</div>
+        </div>
+      </div>
+      <div class="disabled step">
+        <div class="content">
+          <div class="title">Payment</div>
+          <div class="description">Make payment to below account details</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="col-lg-8">
+      <div class="ui info message"><strong>We charge N5,000 per account.</strong></div>
+        <form action "/cryptoAccount" method="POST">
+
+        <div class="ui sub header">Select Digital Currency</div>
+
+        <select id="multiple" name="crypo" class="ui fluid multiple search normal selection dropdown" multiple>
+          {{#each cryptos}}
+            <option name="{{this.id}}" value="{{this.id}}">{{this.coinName}}</option>
+          {{/each}}
+        </select>
+
+        <script>
+        $('#multiple').dropdown();
+        </script>
+         <input class="btn btn-primary" type="submit" name="Submit" value="submit"></input>
+        </form>
+    </div>
+    <div class="col-lg-4">
+      <div class="column">
+        <div class="ui top attached info message">Read This Before You Proceed!</div>
+        <div class="ui bottom attached segment">This section is for those that do not have a digital account anywhere and do not know how to go about it, but you want Elfexo to create one or more for you using a third party exchange.<br/> However, we will send your login credentials once we are through</div>
+      </div>
+    </div>
+
+</div>

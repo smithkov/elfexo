@@ -1,9 +1,32 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.css" rel="stylesheet">
+<script src="/dist/semantic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
 
 <div class="panel panel-container">
-  <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
-      <div class="alert bg-info"> Transaction preview <a href="#" class="pull-right"></a></div>
+  <div style="padding-top:40px; padding-bottom:40px" class="ui last container">
+    <div class="ui three steps">
+      <div class="active step">
+        <div class="content">
+          <div class="title">Preview Trade</div>
+          <div class="description">Check if below trade is correct, if yes then proceed to payment</div>
+        </div>
+      </div>
+      <div class="disabled step">
+        <div class="content">
+          <div class="title">Payment</div>
+          <div class="description">Make payment to below account details.</div>
+        </div>
+      </div>
+      <div class="disabled step">
+        <div class="content">
+          <div class="title">Payment Confirmation</div>
+          <div class="description">Take note of your reference ID for tracking purposes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="col-lg-8">
+
       <table class="table table-hover">
         <thead>
             <tr>
@@ -20,14 +43,14 @@
          </tr>
          <tr>
            <td>Total</td>
-           <td><strong>{{values.total}} USD</strong></td>
+           <td><strong>{{values.total}} Naira</strong></td>
         </tr>
       </thead>
       </table>
 
       <form action="/transaction/payment" method="post">
         <label style="font-style:italic; color:#cc3300">Please enter {{values.name}}'s wallet address</label>
-        <input type="text" name="walletAddr" placeholder="Wallet Address" class="form-control" /><hr/>
+        <input type="text" name="walletAddr" required placeholder="Wallet Address" class="form-control" /><hr/>
         <input name="name" value="{{values.name}}" type="hidden"/>
         <input name="price" value="{{values.price}}" type="hidden"/>
         <input name="amount" value="{{values.amount}}" type="hidden"/>
@@ -38,6 +61,8 @@
 
     </div>
 
-    <div class="col-lg-3"></div>
-  </div>
+    <div class="col-lg-4">
+      <div class="ui top attached info message">Attention!</div>
+      <div class="ui bottom attached segment">Please ensure that your wallet information is correct as we will not be responsible for a loss regarding that. </div>
+    </div>
 </div>

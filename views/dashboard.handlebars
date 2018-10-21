@@ -1,14 +1,48 @@
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-<style>
-th, td {
-    padding: 5px;
-    text-align: left;
-}
-.col{
-  color:#20233B;
-  font-weight: bold;
-}
-</style>
+
+<!--Modal starts here-->
+
+<div class="ui small test modal">
+
+    <div id="modal-header" class="header">
+
+    </div>
+    <div class="content">
+       <form method="post" action="/transaction/dashboardPost">
+       <div class="ui grid">
+          <div class="four wide column">  <img id="modal-img" src="" class="img-thumbnail"></div>
+          <div class="eight wide column">
+            <div class="ui tiny form">
+                  <div class="field">
+                    <a class="ui teal tag label modal-price"></a>
+                  </div>
+                  <div class="field">
+                    <input class="numericOnly" name="amount" id="amt" placeholder="Amount" type="text">
+                    <div id="modal-amount" class="ui pointing label">
+                      Please enter amount eg. 5 for five Coins
+                    </div>
+                  </div>
+
+                  <div class="field">
+
+                    <input readonly id="total" name="total" placeholder="Total" type="number">
+                    <input  id="price" name="price" type="hidden"  readonly></input>
+                    <input id="name" name="name" type="hidden"  readonly></input>
+                  </div>
+
+                  <input name="coinId" id="coinId" type="hidden"/>
+              </div>
+          </div>
+       </div>
+       <hr>
+         <div class="ui buttons actions">
+          <button type="button" class="ui button cancel">Cancel</button>
+          <div class="or"></div>
+          <button type="submit" id="btn-submit" class="ui positive button">Buy Coin</button>
+        </div>
+     </form>
+    </div>
+  </div>
+<!--Modal ends here-->
 {{#if success_msg}}
 <hr>
   <div class="alert alert-success">{{success_msg}}</div>
@@ -52,51 +86,48 @@ th, td {
       </div>
 {{else}}
 {{#if user.status}}
-  <div class="panel panel-container">
+  <div style="padding-top:40px; padding-bottom:40px" class="panel panel-container">
   <div class="row">
     <div class="col-lg-1"></div>
     <div class="col-lg-6">
-      <table id="coinList" class="display" style="width:100%">
-          <thead>
-              <tr>
-                  <th>Coin Name</th>
-                  <th>Price</th>
-                  <th></th>
-                  <th></th>
-              </tr>
-          </thead>
-          <tbody>
-            {{#each cryptos}}
-                <tr class="item" id="{{this.id}}" data-name ="{{this.coinName}}" data-price ="{{this.buyPrice}}">
-                  <a href="#" >
-                    <td><a href="#">{{this.coinName}}</a></td>
-                    <td>{{this.buyPrice}} USD</td>
-                    <td><a href="/buyCoin/{{this.id}}">Buy</a></td>
-                    <td><a href="#">Sell</a></td>
-                  </a>
-               </tr>
 
+        <table class="ui celled table">
+            <thead>
+              <tr>
+                <th>Coin Name</th>
+                <th>Price</th>
+                <th></th>
+
+            </tr>
+          </thead>
+            <tbody>
+                {{#each cryptos}}
+              <tr>
+                <td>
+                  <h4 class="ui image header">
+                    <img src="/uploads/{{this.path}}" class="ui mini rounded image">
+                    <div class="content">
+                      {{this.coinName}}
+                      <div class="sub header">{{this.initial}}
+                    </div>
+                  </div>
+                </h4>
+              </td>
+              <td>
+                {{this.buyPrice}}
+              </td>
+              <td><a class="ui primary basic button item  item" id="{{this.id}}" data-path="{{this.path}}" data-initial="{{this.initial}}" data-name ="{{this.coinName}}" data-price ="{{this.buyPrice}}">Buy</a></td>
               {{/each}}
-          </tbody>
-      </table>
+              </tr>
+            </tbody>
+          </table>
     </div>
 
     <div class="col-lg-4">
-      <p class="alert bg-info">Transaction Panel</p>
-      {{#if error_msg}}
-      <hr>
-        <div class="alert alert-danger">{{error_msg}}</div>
-      {{/if}}
-      <form method="post" action="/transaction/dashboardPost">
-      <table cellpadding="30">
-        <tr><td class="col">Coin Name:</td><td><input id="name" style="width:100%" name="name" type="text"  readonly></input></td></tr>
-        <tr><td class="col">Price:</td><td><input  id="price" style="width:100%" name="price" type="text"  readonly></input></td></tr>
-        <tr><td class="col">Amount:</td><td><input class="numericOnly" name="amount" id="amt" style="width:100%" type="text"></input></td></tr>
-        <tr><td class="col">Total: </td><td><input type="number" id="total" name="total"  readonly style="width:100%"></input></td></tr>
-        <input name="coinId" id="coinId" type="hidden"/>
-        <tr><td></td><td><button id="btn-submit" class="btn btn-primary" type="submit">Buy</button></td></tr>
-      </table>
-    </form>
+      <a href="/openAccount" class="fluid ui orange button">Create a Digital Account With Us</a>
+
+      <div class="ui top attached info message">Attention!</div>
+      <div class="ui bottom attached segment">Please click on buy button to select a digital currency you want to buy. The orange button labelled "Create a Digital Account With Us" allows us to assist you if you wish to create a crypto currency account with us (this generates a wallet address for you). </div>
 
     </div>
     <div class="col-lg-1"></div>
@@ -110,9 +141,8 @@ th, td {
     </div>
   </div>
 {{/if}}
-
-
 {{/if}}
+
 
 
 	<!-- <div class="row">
@@ -151,12 +181,34 @@ th, td {
 		</div><!--/.row-->
     <script>
     $(document).ready(function() {
-      $(".numericOnly").keypress(function (e) {
-         if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
-      });
       var price = $("#price");
       var total = $("#total");
       var amt = $("#amt");
+      $(".item").click(function(){
+        $('.small.modal')
+          .modal('show')
+        ;
+        total.val("");
+        amt.val("");
+         $("#modal-img").attr("src","/uploads/"+$(this).attr("data-path"))
+         $("#modal-header").empty().html($(this).attr("data-name")+"("+ $(this).attr("data-initial")+")");
+         $("#modal-amount").empty().html("Please enter amount eg. 5 for five "+$(this).attr("data-name"));
+         $(".modal-price").empty().html($(this).attr("data-price")+" Naira per "+$(this).attr("data-name"));
+         $("#name").val($(this).attr("data-name"));
+         price.val($(this).attr("data-price"));
+        $("#coinId").val($(this).attr("id"));
+        total.empty();
+
+         amt.keyup(function(){
+          total.empty().val(parseFloat(amt.val()) * parseFloat(price.val()));
+         })
+      });
+      $(".numericOnly").keypress(function (e) {
+         if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+      });
+    //  var price = $("#price");
+
+
       var btnSubmit =  $("#btn-submit");
       btnSubmit.prop('disabled', true);
 
@@ -168,16 +220,7 @@ th, td {
             btnSubmit.prop('disabled', false);
       });
 
-        $(".item").click(function(){
-           $("#name").val($(this).attr("data-name"));
-          price.val($(this).attr("data-price"));
-          $("#coinId").val($(this).attr("id"));
-          total.empty();
 
-           amt.keyup(function(){
-            total.empty().val(parseFloat(amt.val()) * parseFloat(price.val()));
-           })
-        })
         $('#coinList').DataTable();
     } );
     </script>

@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cryptod - user panel</title>
-	<link href="/dashboard/css/bootstrap.min.css" rel="stylesheet">
+	<title>Elfexo - user panel</title>
+	<link href="/dashboard/css/bootstrap.css" rel="stylesheet">
 	<link href="/dashboard/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/dashboard/css/datepicker3.css" rel="stylesheet">
 	<link href="/dashboard/css/styles.css" rel="stylesheet">
+
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
 	 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+	 <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.css" rel="stylesheet">
+
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
 
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -27,7 +32,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Cryptod</span>Admin</a>
+				<a class="navbar-brand" href="#"><span>Elfexo</span>Admin</a>
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
@@ -49,12 +54,13 @@
 			{{#if user.roleId}}
 	        <li><a href="/coinAdd"><em class="fa fa-bitcoin">&nbsp;</em> Manage Coins</a></li>
 			{{/if}}
+
 			<!-- {{#if user.roleId}} -->
 
 		 <!-- {{/if}} -->
 			<li><a href="/transaction/myTransaction"><em class="fa fa-bar-chart">&nbsp;</em> Transactions</a></li>
-			 <li><a href="/transaction/allTransaction"><em class="fa fa-money">&nbsp;</em> All Transactions</a></li>
 			 {{#if user.roleId}}
+			    <li><a href="/transaction/allTransaction"><em class="fa fa-money">&nbsp;</em> All Transactions</a></li>
  	        <li><a href="/users"><em class="fa fa-users">&nbsp;</em> Users</a></li>
  			{{/if}}
 			<li><a href="/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
@@ -78,7 +84,7 @@
 		</div><!--/.row-->
 	</div>	<!--/.main-->
 
-	<script src="/dashboard/js/bootstrap.min.js"></script>
+
 	<script src="/dashboard/js/chart.min.js"></script>
 	<script src="/dashboard/js/chart-data.js"></script>
 	<script src="/dashboard/js/easypiechart.js"></script>

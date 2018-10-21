@@ -1,0 +1,43 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.css" rel="stylesheet">
+<script src="/dist/semantic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+
+
+<div class="panel panel-container">
+  <div style="padding-top:40px; padding-bottom:40px" class="ui last container">
+  <div class="ui three steps">
+
+    <div class="step">
+      <div class="content">
+        <div class="title">Preview Trade</div>
+        <div class="description">Check if below trade is correct, if yes then proceed to payment.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="content">
+        <div class="title">Payment</div>
+        <div class="description">Make payment to below account details.</div>
+      </div>
+    </div>
+    <div class="active step">
+      <div class="content">
+        <div class="title">Payment Confirmation</div>
+        <div class="description">Take note of your reference ID for tracking purposes.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-8">
+  <h4 class="ui top attached block header">
+    Transaction Confirmation
+  </h4>
+  <div class="ui bottom attached segment">
+    Your transaction will be processed as soon as possible, we will get hold of you once we are done.<br/><strong style="color:red">Reference ID: {{refId}}</strong>
+  </div>
+</div>
+
+    <div class="col-lg-4">
+      <div class="ui top attached info message">Attention!</div>
+      <div class="ui bottom attached segment">Please kindly take note of your REFERENCE ID. </div>
+    </div>
+</div>

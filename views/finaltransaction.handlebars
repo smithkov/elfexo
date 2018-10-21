@@ -1,14 +1,93 @@
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.css" rel="stylesheet">
+<script src="/dist/semantic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
 <div class="panel panel-container">
-  <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
-      {{#if success_msg}}
+  <div style="padding-top:40px; padding-bottom:40px" class="ui last container">
+  <div class="ui three steps">
+
+    <div class="step">
+      <div class="content">
+        <div class="title">Preview Trade</div>
+        <div class="description">Check if below trade is correct, if yes then proceed to payment.</div>
+      </div>
+    </div>
+    <div class="active step">
+      <div class="content">
+        <div class="title">Payment</div>
+        <div class="description">Make payment to below account details.</div>
+      </div>
+    </div>
+    <div class="disabled step">
+      <div class="content">
+        <div class="title">Payment Confirmation</div>
+        <div class="description">Take note of your reference ID for tracking purposes.</div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-lg-8">
+      <!-- Beginning of responsive table-->
+      <div class="ui container">
+        <table class="ui celled table">
+          <thead>
+            <th>Account Details</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h4 class="ui image header">
+
+                  <div class="content">
+                    Bank Name
+                    <div class="sub header">
+                  </div>
+                </h4>
+              </td>
+              <td>
+                GT Bank
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4 class="ui image header">
+
+                  <div class="content">
+                    Account Name
+                    <div class="sub header">
+                  </div>
+                </h4>
+              </td>
+              <td>
+                Nnamdi Nwosu
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4 class="ui image header">
+                  <div class="content">
+                    Account Number
+                    <div class="sub header">
+                  </div>
+                </h4>
+              </td>
+              <td>
+                0330393939932
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
       <hr>
-        <div class="alert bg-info">{{success_msg}}</div>
-      {{/if}}
+      <form method="post">
+         <button type="submit" class="btn btn-primary">Confirm payment</button><p></p>
+      </form>
     </div>
 
-    <div class="col-lg-3"></div>
+    <div class="col-lg-4">
+      <div class="ui top attached info message">Attention!</div>
+      <div class="ui bottom attached segment">Please kindly confirm payment if you have paid into the listed account number. </div>
+    </div>
   </div>
 </div>

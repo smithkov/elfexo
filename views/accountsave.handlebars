@@ -1,0 +1,61 @@
+
+
+
+<div class="col-lg-12">
+
+    <div style="padding-top:40px; padding-bottom:40px" class="ui last container">
+      <div class="ui three steps">
+        <div class="step">
+          <div class="content">
+            <div class="title">Selection</div>
+            <div class="description">Select a coin for account creation</div>
+          </div>
+        </div>
+        <div class="active step">
+          <div class="content">
+            <div class="title">Confirmation</div>
+            <div class="description">Confirn transaction before proceeding</div>
+          </div>
+        </div>
+        <div class="disabled step">
+          <div class="content">
+            <div class="title">Payment</div>
+            <div class="description">Make payment to below account details</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <form action="/digitalAccountCreateSave" method="post">
+      <table class="ui celled table">
+        <thead>
+         <tr><th>Coin</th>
+         <th>Price</th>
+
+        </tr></thead>
+        <tbody>
+          {{#each cryptos}}
+         <tr>
+           <td data-label="Name">{{this.name}}</td>
+           <td data-label="Age">{{this.price}}</td>
+         </tr>
+         {{/each}}
+         <tr>
+           <td data-label="Name"><strong>Total Amount</strong></td>
+           <td data-label="Age"><strong>{{total}}</strong></td>
+         </tr>
+        </tbody>
+      </table
+
+      <hr>
+       <input class="btn btn-primary" type="submit" name="submit" value="Proceed to payment"></input>
+    </form>
+    </div>
+    <div class="col-lg-4">
+      <div class="ui top attached info message">Read This Before You Proceed!</div>
+      <div class="ui bottom attached segment">You selected to create an account for the listed digital currency, if yes then proceed to payment.</div>
+    </div>
+    </div>
+
+</div>

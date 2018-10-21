@@ -21,6 +21,9 @@ var transactionSchema = mongoose.Schema({
      type: String,
      required: true
    },
+   hasUserConfirm: {
+     type: Boolean
+   },
    txStatus: {
      type: Boolean
    },

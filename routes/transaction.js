@@ -64,6 +64,8 @@ router.get('/allTransaction',ensureAuthenticated, function(req, res, next) {
   })
 });
 
+
+
 router.get('/toggle/:_id',ensureAuthenticated, function(req, res, next) {
   //if(req.user.roleId){
   var id = req.params._id;
@@ -96,28 +98,56 @@ router.post('/payment',ensureAuthenticated,function(req, res, next) {
     var coinId = req.body.coinId;
     var a = Math.floor(Math.random() * (1000 - 10000)) + 100000;
     var b = Math.floor(Math.random() * (1000 - 10000)) + 100000;
+    var rand = a+""+b;
   	var newTransact = new Transac({
-      transactionId: a+""+b,
+      transactionId: rand,
       buyPrice: buyPrice,
       total:total,
       amount:amount,
       walletAddress: wallet,
       txStatus: false,
+      hasUserConfirm:false,
       coinId: coinId,
       userId: req.user.id,
     });
-
+    req.session.refId = rand;
     router.addTransaction(newTransact, function(err,tnx) {
       if (err) throw err;
-      console.log(tnx);
+     req.session.transaction = tnx;
+
+     req.flash('success_msg', 'Your transaction has gone through');
+     res.redirect("/transaction/finaltnx");
     });
-    req.flash('success_msg', 'Your transaction has gone through');
-    res.redirect("/transaction/finaltnx");
+
 });
 
 router.get('/finaltnx', ensureAuthenticated,function(req, res, next) {
 
    res.render('finaltransaction',{layout: 'layoutDashboard.handlebars',user: req.user});
+});
+
+router.post('/finaltnx', ensureAuthenticated,function(req, res, next) {
+   var getTransaction =  req.session.transaction;
+   var id = getTransaction._id;
+   router.getTransactionById(id,function(err,transaction){
+     if(err){
+       throw err;
+     }
+     transaction.hasUserConfirm = true;
+     router.updateTransaction(id,transaction,{},function(err,tnx){
+       if(err){
+         throw err;
+       }
+     //  req.flash('success_msg',image.coinName+ ' have been modified successfully');
+       res.redirect("/transaction/transactionConfirm");
+     })
+   })
+  // res.render('finaltransaction',{layout: 'layoutDashboard.handlebars',user: req.user});
+});
+
+router.get('/transactionConfirm', ensureAuthenticated,function(req, res, next) {
+
+   res.render('transactionconfirmation',{layout: 'layoutDashboard.handlebars',user: req.user, refId:req.session.refId});
 });
 
 router.post('/dashboardPost', function(req, res, next) {
@@ -126,6 +156,11 @@ router.post('/dashboardPost', function(req, res, next) {
     var amount = req.body.amount;
     var total = req.body.total;
     var coinId = req.body.coinId;
+    console.log(name+" name")
+    console.log(price +" price")
+    console.log(amount+" amount")
+    console.log(total+" total")
+    console.log(coinId+" coinId")
 
     req.checkBody('price','Price is required').notEmpty();
     req.checkBody('amount','Amount is required').notEmpty();
